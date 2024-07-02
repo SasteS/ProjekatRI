@@ -1,7 +1,7 @@
 import numpy as np
 from sklearn.neighbors import NearestNeighbors
 
-knn_model = NearestNeighbors(n_neighbors=10, algorithm='auto')
+knn_model = NearestNeighbors(n_neighbors=10, algorithm='brute', metric='cosine')
 
 # Fitting Nearest Neighbors model
 def fit_knn_model(train_data):
