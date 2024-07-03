@@ -5,8 +5,13 @@ import cosine_sim as cosine_sim
 def main():
     movie_indices = index_mapping.keys()
     
+    counter=0
     for index in movie_indices:
+        counter += 1
+        if counter > 50: 
+            break
         print(movies_df['title'][index])
+
 
     movie_title = input("Enter a movie name you would like\nto find similar movies to: ").strip()
     movie_row = movies_df[movies_df['title'].str.lower() == movie_title.lower()]
