@@ -66,8 +66,10 @@ count_matrix = count_vectorizer.fit_transform(movies_df['combined_features'])
 # Combining all features into a single feature matrix
 features_matrix = np.hstack((count_matrix.toarray(), embedding_matrix, movies_df[numerical_features].values))
 
-#print(f'Features matrix shape: {features_matrix.shape}')  # Debug statement
-
 # Splitting the data
 train_data, test_data, train_indices, test_indices = train_test_split(features_matrix, movies_df.index, test_size=0.2, random_state=42)
-#print(f'Train data shape: {train_data.shape}, Test data shape: {test_data.shape}')  # Debug statement
+
+# Creating the dictionary to map original indices to their new positions
+index_mapping = {original_index: i for i, original_index in enumerate(test_indices)}
+
+#print(index_mapping)
