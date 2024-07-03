@@ -7,11 +7,17 @@ knn_model = NearestNeighbors(n_neighbors=10, algorithm='auto')
 def fit_knn_model(train_data):
     knn_model.fit(train_data)
 
-# Function to find similar movies using KNN
+# Function to find similar movies using KNN, returning indices and distances
 def find_similar_movies(features_matrix, input_index, k=10):
     distances, indices = knn_model.kneighbors([features_matrix[input_index]])
     similar_indices = indices[0][1:]  # Exclude the first item (itself)
-    return similar_indices
+    similar_distances = distances[0][1:]  # Distances corresponding to similar_indices
+    
+    # Sort indices based on distances (ascending order)
+    sorted_indices = [x for _, x in sorted(zip(similar_distances, similar_indices))]
+    
+    return sorted_indices
+
 
 # Evaluating the model using Precision@k with a subset of the test data
 def precision_at_k(features_matrix, test_indices, train_indices, k=10, subset_size=100):
