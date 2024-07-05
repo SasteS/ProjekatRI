@@ -19,7 +19,7 @@ def main():
                 similar_movies_indices = knn.find_similar_movies(features_matrix, input_index)
                 knn.compute_precision(features_matrix, test_indices, train_indices)
             elif model.lower() == "cosine":
-                similar_movies_indices = cosine_sim.find_Isimilar_movies(input_index, features_matrix)
+                similar_movies_indices = cosine_sim.find_similar_movies(input_index, features_matrix)
                 cosine_sim.compute_precision(features_matrix, test_indices, train_indices)
             else:
                 print(f"Model '{model}' not recognized. Please choose 'Knn' or 'cosine'.")
