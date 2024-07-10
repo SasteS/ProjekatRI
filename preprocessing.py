@@ -66,11 +66,8 @@ count_matrix = count_vectorizer.fit_transform(movies_df['combined_features'])
 
 features_matrix = np.hstack((count_matrix.toarray(), embedding_matrix, movies_df[numerical_features].values))
 
-#print(f'Features matrix shape: {features_matrix.shape}')  # Debug statement
-
 # Splitting the data
 train_data, test_data, train_indices, test_indices = train_test_split(features_matrix, movies_df.index, test_size=0.2, random_state=42)
-#print(f'Train data shape: {train_data.shape}, Test data shape: {test_data.shape}')  # Debug statement
 
 test_movies=[]
 with open("test_data.txt", "w", encoding="utf-8") as file:
@@ -99,3 +96,5 @@ with open("train_data.txt", "w", encoding="utf-8") as file:
         file.write(f"Vote Count: {movie['vote_count']}\n")
         file.write(f"Revenue: {movie['revenue']}\n")
         file.write("="*80 + "\n")
+        
+
