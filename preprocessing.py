@@ -63,13 +63,38 @@ movies_df['combined_features'] = movies_df['genres'] + ' ' + movies_df['keywords
 count_vectorizer = CountVectorizer(stop_words='english')
 count_matrix = count_vectorizer.fit_transform(movies_df['combined_features'])
 
-# Combining all features into a single feature matrix
+
 features_matrix = np.hstack((count_matrix.toarray(), embedding_matrix, movies_df[numerical_features].values))
 
 # Splitting the data
 train_data, test_data, train_indices, test_indices = train_test_split(features_matrix, movies_df.index, test_size=0.2, random_state=42)
 
-# Creating the dictionary to map original indices to their new positions
-index_mapping = {original_index: i for i, original_index in enumerate(test_indices)}
+test_movies=[]
+with open("test_data.txt", "w", encoding="utf-8") as file:
+    for index in test_indices:
+        movie = movies_df.iloc[index]
+        test_movies.append(movie['title'])
+        file.write(f"Title: {movie['title']}\n")
+        file.write(f"Overview: {movie['overview']}\n")
+        file.write(f"Genres: {movie['genres']}\n")
+        file.write(f"Keywords: {movie['keywords']}\n")
+        file.write(f"Popularity: {movie['popularity']}\n")
+        file.write(f"Vote Average: {movie['vote_average']}\n")
+        file.write(f"Vote Count: {movie['vote_count']}\n")
+        file.write(f"Revenue: {movie['revenue']}\n")
+        file.write("="*80 + "\n")
 
-#print(index_mapping)
+with open("train_data.txt", "w", encoding="utf-8") as file:
+    for index in test_indices:
+        movie = movies_df.iloc[index]
+        file.write(f"Title: {movie['title']}\n")
+        file.write(f"Overview: {movie['overview']}\n")
+        file.write(f"Genres: {movie['genres']}\n")
+        file.write(f"Keywords: {movie['keywords']}\n")
+        file.write(f"Popularity: {movie['popularity']}\n")
+        file.write(f"Vote Average: {movie['vote_average']}\n")
+        file.write(f"Vote Count: {movie['vote_count']}\n")
+        file.write(f"Revenue: {movie['revenue']}\n")
+        file.write("="*80 + "\n")
+        
+
